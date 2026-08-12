@@ -23,7 +23,7 @@ if __name__ == "__main__":
         else:
             print("Controller failed to connect.")
         while True:
-            handle.move_to_joint_positions([0,0,0,0,0,-1, -1])
+            handle.move_to_joint_positions([0,0,0,0,0,0, -1])
             for motor_id in list(range(1,8)):
                 print(f"motor {motor_id}")
                 print(f"pos: {-1*handle.motor_state[motor_id].pos:.3f} rad")
