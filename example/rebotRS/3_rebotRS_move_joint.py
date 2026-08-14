@@ -1,9 +1,15 @@
-from motorbridge import Controller
 
+'''
+    调用控制函数会控制机械臂以期望速度转动到期望角度。
+    Calling the control function will control the robotic arm to rotate at the desired speed to the desired angle
+    
+    ctrl c 结束程序后机械臂会缓慢返回零点，避免突然下坠
+    After the program is terminated with  ctrl c, 
+    the robotic arm will slowly return to the zero point to prevent sudden drops
+'''
+from motorbridge import Controller
 import os
-import sys
-# 获取项目根目录
-# 1_rebotDM_connect.py -> rebotDM -> example -> rebotArm_ctrl (根目录)
+import sys  
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(project_root)
 
