@@ -128,7 +128,7 @@ sudo ip link set can0 up
 
 - 启动前确保机械臂电源已接通
 - `rebotDM` 示例默认串口为 `/dev/ttyACM0`
-- `rebotRS` 示例默认 CAN 接口为 `can0`
+- `rebotDM` 示例默认 CAN 接口为 `can0`
  - `rebotRS` 示例默认 CAN 接口为 `can0`
  - 注意：`rebotDM` 与 `rebotRS` 的 socketcan 版本默认使用 `can0` 作为 CAN 接口（可按需修改）
 - 运行示例脚本时会将项目根目录加入 `sys.path`，无需额外安装包
