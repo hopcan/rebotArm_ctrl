@@ -1,8 +1,14 @@
+
+'''
+    上电会自动检测电机是否全部在线、电机id是否有效、参数配置表是否配置
+    Upon power-on, the system will automatically check whether all motors are online, 
+    whether the motor IDs are valid, and whether the parameter configuration table is properly set up
+    
+    ctrl c 结束程序后机械臂会缓慢返回零点，避免突然下坠
+    After the program is terminated with ctrl c, 
+    the robotic arm will slowly return to the zero point to prevent sudden drops
+'''
 from motorbridge import Controller
-
-#上电会自动检测电机是否全部在线、电机id是否有效、参数配置表是否配置
-#ctrl c 结束程序后机械臂会缓慢返回零点，避免突然下坠
-
 import os
 import sys
 # 获取项目根目录
