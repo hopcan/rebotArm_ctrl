@@ -85,14 +85,36 @@ with reBotArm_handle(ctrl, "rebotDM") as arm:
         arm.move_to_joint_positions([0,0,0,0.5,0.5,0, -1])
 ```
 
+
 对于 `rebotRS`，一般使用 CAN 总线：
 
 ```python
 channel = "can0"
 ctrl = Controller(channel)
 with reBotArm_handle(ctrl, "rebotRS") as arm:
-    ...
+  ...
 ```
+
+> 注意：`rebotDM` 与 `rebotRS` 的 socketcan 使用方式相同，若你使用 socketcan 版本，请参阅下面的 SocketCAN 设置。
+
+### SocketCAN 设置（适用于 `rebotDM` 与 `rebotRS` 的 socketcan 版本）
+
+如果你使用的是 socketcan 版本，需在使用前配置好主机上的 `can0` 接口。常用的设置步骤如下（需要 `sudo` 权限）：
+
+```bash
+ip -br link
+sudo ip link set can0 down
+sudo ip link set can0 type can bitrate 1000000
+sudo ip link set can0 up
+```
+
+说明：
+- `ip -br link`：简洁地查看当前网络接口状态，确认是否存在 `can0`。
+- `bitrate 1000000`：示例比特率，需与硬件设备的实际波特率一致，可根据需要调整。
+- 如果你在虚拟机或没有物理 CAN 设备上测试，可以使用 `vcan`（虚拟 CAN）替代真实接口。
+
+运行上述命令后，使用 `ip -br link` 或 `ifconfig can0` 检查 `can0` 是否为 `UP` 状态，然后再运行示例脚本。
+
 
 ## 主要功能
 
@@ -107,6 +129,8 @@ with reBotArm_handle(ctrl, "rebotRS") as arm:
 - 启动前确保机械臂电源已接通
 - `rebotDM` 示例默认串口为 `/dev/ttyACM0`
 - `rebotRS` 示例默认 CAN 接口为 `can0`
+ - `rebotRS` 示例默认 CAN 接口为 `can0`
+ - 注意：`rebotDM` 与 `rebotRS` 的 socketcan 版本默认使用 `can0` 作为 CAN 接口（可按需修改）
 - 运行示例脚本时会将项目根目录加入 `sys.path`，无需额外安装包
 - 若出现 PID / 电机参数错误，请检查对应 YAML 文件中的 `MIT` 和 `POS_VEL` 配置
 

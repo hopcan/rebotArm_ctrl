@@ -7,6 +7,12 @@
     After the program is terminated with  ctrl c, 
     the robotic arm will slowly return to the zero point to prevent sudden drops
 '''
+# SocketCAN 使用提示：如果你使用 `can0`（socketcan），请在运行脚本前初始化接口：
+# ip -br link
+# sudo ip link set can0 down
+# sudo ip link set can0 type can bitrate 1000000
+# sudo ip link set can0 up
+# 详情请参阅项目根目录下的 README.md
 from motorbridge import Controller
 import os
 import sys  

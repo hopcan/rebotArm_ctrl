@@ -1,9 +1,22 @@
-from motorbridge import Controller
 
+
+'''
+    调用设置零点函数会将机械臂当前电机的角度设置成零位。
+    calling the zero setting function will set the angle of the current motor of the robotic arm to zero.
+    
+    ctrl c 结束程序后机械臂会缓慢返回零点，避免突然下坠
+    After the program is terminated with  ctrl c, 
+    the robotic arm will slowly return to the zero point to prevent sudden drops
+'''
+# SocketCAN 使用提示：如果你使用 `can0`（socketcan），请在运行脚本前初始化接口：
+# ip -br link
+# sudo ip link set can0 down
+# sudo ip link set can0 type can bitrate 1000000
+# sudo ip link set can0 up
+# 详情请参阅项目根目录下的 README.md
+from motorbridge import Controller
 import os
 import sys
-# 获取项目根目录
-# 1_rebotDM_connect.py -> rebotDM -> example -> rebotArm_ctrl (根目录)
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(project_root)
 
