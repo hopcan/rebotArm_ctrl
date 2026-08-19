@@ -133,6 +133,8 @@ class reBotArm_handle:
                 try :
                     self.ctrl.enable_all()
                     if self._change_motor_mode() :
+                        for motor_id in list(range(1,8)):
+                            self.motor_state[motor_id] = self.motor_handle[motor_id].get_state()
                         return True
                     else :
                         return False
@@ -196,7 +198,7 @@ class reBotArm_handle:
             
         return True
     
-    def move_to_joint_positions(self,positions,velocity=None,torgue=None):
+    def move_to_joint_positions(self,positions,velocity=None,torque=None):
         if not self.is_connected:
             return False
         if len(positions) != len(self.expected_ids):
@@ -212,10 +214,10 @@ class reBotArm_handle:
                     vel= 0.0
                 else :
                     vel = velocity[motor_can_id-1]
-                if torgue is None:
+                if torque is None:
                     tau = 0.0
                 else :
-                    tau = torgue[motor_can_id-1]
+                    tau = torque[motor_can_id-1]
             if self.arm_version == "rebotRS":
                 if self.use_mode  [motor_can_id] == "MIT" :
                     self.motor_handle[motor_can_id].send_mit(
