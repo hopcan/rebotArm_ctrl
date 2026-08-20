@@ -10,7 +10,7 @@ print(rebotDM_file_path)
 
 class reBotArm_handle:
 
-    def __init__(self, interface,arm_version="rebotDM"):  #rebotDM or rebotRS
+    def __init__(self, interface,arm_version = "rebotDM",config_path = None):  #rebotDM or rebotRS
         self.is_connected = False
         self.is_all_ids_valid = False
         self.ctrl = interface
@@ -23,11 +23,13 @@ class reBotArm_handle:
         self.joint_posmin = {i: None for i in self.expected_ids} 
         self.motor_state = {i: None for i in self.expected_ids} 
         self.arm_version = arm_version
-        if self.arm_version == "rebotDM" :
-            self.file_path = rebotDM_file_path 
-        elif self.arm_version == "rebotRS" :
-            self.file_path = rebotRS_file_path
-
+        if config_path == None :
+            if self.arm_version == "rebotDM" :
+                self.file_path = rebotDM_file_path 
+            elif self.arm_version == "rebotRS" :
+                self.file_path = rebotRS_file_path
+        else :
+            self.file_path = config_path
     def _load_robot_config(self, file_path=None):
         if file_path is None:
             file_path = self.file_path
