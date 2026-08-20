@@ -40,5 +40,7 @@ if __name__ == "__main__":
                 print(f"motor {motor_id}")
                 print(f"pos: {-1*handle.motor_state[motor_id].pos:.3f} rad")
                 print(f"vel: {handle.motor_state[motor_id].vel:.3f} rad/s")
-                print(f"torque: {handle.motor_state[motor_id].torq:.3f} Nm\n")
+                print(f"torque: {handle.motor_state[motor_id].torq:.3f} Nm")
+                print(f"t_mos: {handle.motor_state[motor_id].t_mos:.1f} °C")
+                print(f"t_rotor: {handle.motor_state[motor_id].t_rotor:.3f} °C\n")
             time.sleep(0.002)
