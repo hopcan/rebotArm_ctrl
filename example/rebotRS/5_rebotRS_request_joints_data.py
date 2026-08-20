@@ -8,9 +8,17 @@
     After the program is terminated with ctrl c, 
     the robotic arm will slowly return to the zero point to prevent sudden drops
 '''
+# SocketCAN 使用提示：如果你使用 `can0`（socketcan），请在运行脚本前初始化接口：
+# ip -br link
+# sudo ip link set can0 down
+# sudo ip link set can0 type can bitrate 1000000
+# sudo ip link set can0 up
+# 详情请参阅项目根目录下的 README.md
 from motorbridge import Controller
 import os
 import sys
+# 获取项目根目录
+# 1_rebotDM_connect.py -> rebotDM -> example -> rebotArm_ctrl (根目录)
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(project_root)
 
@@ -20,14 +28,16 @@ import time
 
 
 if __name__ == "__main__":
-    channel = "/dev/ttyACM0"  
-    ctrl =Controller.from_dm_serial(channel, 921600)
+    channel = "can0"  
+    ctrl =Controller(channel)
 
-    with reBotArm_handle(ctrl,"rebotDM") as handle:
+    with reBotArm_handle(ctrl,"rebotRS") as handle:
         if handle.is_connected:
             print("Controller is connected and ready.")
             print("Motor Use Modes:", handle.use_mode)
         else:
             print("Controller failed to connect.")
+        handle.ctrl.disable_all()
         while True:
+            print(handle.get_joints_state())
             time.sleep(0.002)

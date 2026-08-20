@@ -128,7 +128,16 @@ class reBotArm_handle:
         if len(found_motors) == len(self.expected_ids) :
             print("All ids are valid !")
             return True
-
+        
+    def get_joints_state(self):
+        joints_pos = [0]*7
+        for motor_can_id in list(range(1, 8)):
+            self.motor_handle[motor_can_id].request_feedback()
+            time.sleep(0.01)
+            self.motor_state[motor_can_id] = self.motor_handle[motor_can_id].get_state()
+            joints_pos[motor_can_id-1] = self.motor_state[motor_can_id].pos
+        return joints_pos
+    
     def connect(self):
         if self._add_motor_to_ctrl():
             if self.check_ids_valid() :

@@ -123,6 +123,7 @@ sudo ip link set can0 up
 - `set_zero_position()`：设置所有电机的零点位置
 - `move_to_joint_positions(positions, velocity=None, torgue=None)`：运动到指定关节位置
 - `return_zero_position()`：平稳返回预设零点姿态
+- `get_joints_state()`：主动更新机械臂各关节状态，并返回当前关节角度
 
 ## 注意事项
 

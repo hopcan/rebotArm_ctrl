@@ -29,5 +29,7 @@ if __name__ == "__main__":
             print("Motor Use Modes:", handle.use_mode)
         else:
             print("Controller failed to connect.")
+        handle.ctrl.disable_all()
         while True:
+            print(handle.get_joints_state())
             time.sleep(0.002)
