@@ -6,7 +6,6 @@ import os
 base_dir = os.path.dirname(os.path.abspath(__file__))
 rebotDM_file_path = os.path.join(base_dir, 'config', 'rebotDM.yaml')
 rebotRS_file_path = os.path.join(base_dir, 'config', 'rebotRS.yaml')
-print(rebotDM_file_path)
 
 class reBotArm_handle:
 
