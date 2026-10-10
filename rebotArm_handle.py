@@ -136,6 +136,13 @@ class reBotArm_handle:
             self.motor_state[motor_can_id] = self.motor_handle[motor_can_id].get_state()
             joints_pos[motor_can_id-1] = self.motor_state[motor_can_id].pos
         return joints_pos
+
+    def return_joints_last_pos(self):
+        joints_pos = [0]*7
+        for motor_can_id in list(range(1, 8)):
+            self.motors[motor_can_id].state = self.motors[motor_can_id].handle.get_state()
+            joints_pos[motor_can_id-1] = self.motors[motor_can_id].state.pos
+        return joints_pos
     
     def connect(self):
         if self._add_motor_to_ctrl():
