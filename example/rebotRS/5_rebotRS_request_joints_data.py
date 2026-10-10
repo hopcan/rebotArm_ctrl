@@ -31,6 +31,7 @@ if __name__ == "__main__":
             print("Controller failed to connect.")
         while True:
             joints_pos = handle.get_joints_state()
-            handle.move_to_joint_positions(joints_pos)
+            neg_pos = [-pos for pos in joints_pos]
+            handle.move_to_joint_positions(neg_pos)
             print(joints_pos)
             time.sleep(0.002)
